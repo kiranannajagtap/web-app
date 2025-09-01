@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 152247411618.dkr.ecr.eu-west-1.amazonaws.com
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t my-app .
+      - docker tag my-app:latest 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest
+      - echo Writing imagedefinitions.json file...
+      - printf '[{"name":"my-app-container","imageUri":"%s"}]' 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
+    - appspec.yaml
+    - taskdef.json
