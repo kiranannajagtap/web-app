@@ -1,0 +1,53 @@
+/* Full background */
+body {
+    margin: 0;
+    padding: 0;
+    background: url("background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Overlay text */
+.overlay {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 8px black;
+}
+
+/* Animated circles */
+.circle {
+    position: absolute;
+    bottom: -100px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: moveUp 10s linear infinite;
+}
+
+/* Multiple circles */
+.circle:nth-child(2) {
+    left: 30%;
+    width: 60px;
+    height: 60px;
+    animation-duration: 12s;
+}
+
+.circle:nth-child(3) {
+    left: 70%;
+    width: 80px;
+    height: 80px;
+    animation-duration: 15s;
+}
+
+/* Animation keyframes */
+@keyframes moveUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
