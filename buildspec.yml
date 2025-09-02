@@ -1,22 +1,33 @@
 version: 0.2
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
+      - aws --version
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 152247411618.dkr.ecr.eu-west-1.amazonaws.com
+
+      # Define repository URI (replace repo name if different)
+      - REPOSITORY_URI=152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app
+
+      # Use short commit hash for tagging (fallback: latest)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+
   build:
     commands:
+      - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t my-app .
-      - docker tag my-app:latest 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+
   post_build:
     commands:
-      - echo Pushing the Docker image...
-      - docker push 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest
+      - echo Build completed on `date`
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing imagedefinitions.json file...
-      - printf '[{"name":"my-app-container","imageUri":"%s"}]' 152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest > imagedefinitions.json
+      - printf '[{"name":"my-app-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
-    - appspec.yaml
-    - taskdef.json
