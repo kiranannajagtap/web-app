@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flask App with Background & Animation</title>
+    <title>Flask App with Background & VW Logo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="overlay">
-        <h1>🚀 Welcome to My ECS App</h1>
+        <h1>
+            <img src="{{ url_for('static', filename='vw_logo.png') }}" alt="VW Logo" class="logo-inline">
+            Welcome to VW App
+        </h1>
         <p>Created using AWS cicd</p>
     </div>
 

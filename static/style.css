@@ -20,6 +20,15 @@ body {
     text-shadow: 2px 2px 8px black;
 }
 
+/* VW logo inline at start of heading */
+.logo-inline {
+    width: 50px;         /* adjust size */
+    height: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+    filter: drop-shadow(1px 1px 3px black);
+}
+
 /* Animated circles */
 .circle {
     position: absolute;
@@ -31,7 +40,6 @@ body {
     animation: moveUp 10s linear infinite;
 }
 
-/* Multiple circles */
 .circle:nth-child(2) {
     left: 30%;
     width: 60px;
