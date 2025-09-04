@@ -6,5 +6,5 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-          ContainerName: "simplehttp-container"
+          ContainerName: "my-app-container"
           ContainerPort: 80
