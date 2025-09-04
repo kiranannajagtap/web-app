@@ -35,7 +35,7 @@ artifacts:
     - 'appspec.yaml'
     - 'taskdef.json'
   secondary-artifacts:
-    DefinitionArtifact:
+    BuildArtifact:
       files:
         - appspec.yaml
         - taskdef.json
