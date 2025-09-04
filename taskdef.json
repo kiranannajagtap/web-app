@@ -9,7 +9,7 @@
       "environment": [],
       "environmentFiles": [],
       "essential": true,
-      "image": "IMAGE1_NAME",  # This placeholder will be replaced with the actual image URI
+      "image": "IMAGE1_NAME",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
