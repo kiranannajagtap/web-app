@@ -9,7 +9,7 @@
       "environment": [],
       "environmentFiles": [],
       "essential": true,
-      "image": "IMAGE1_NAME",
+      "image": "IMAGE1_NAME",  # This placeholder will be replaced with the actual image URI
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -58,19 +58,13 @@
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
-      "name": "com.amazonaws.ecs.capability.task-iam-role"
+      "name": "ecs.capability.execution-role-awslogs"
     },
     {
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-    },
-    {
       "name": "ecs.capability.task-eni"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
     }
   ],
   "requiresCompatibilities": [
