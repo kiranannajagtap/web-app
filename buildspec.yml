@@ -7,12 +7,8 @@ phases:
       - aws --version
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 152247411618.dkr.ecr.eu-west-1.amazonaws.com
 
-      # Define repository URI (replace repo name if different)
+      # Define repository URI
       - REPOSITORY_URI=152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app
-
-      # Use short commit hash for tagging (fallback: latest)
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
 
   build:
     commands:
@@ -20,20 +16,18 @@ phases:
       - echo Building the Docker image...
       # Build locally with name my-app:latest
       - docker build -t my-app:latest .
-      # Tag local image to ECR repo (latest + commit hash)
+      # Tag local image to ECR repo (only latest)
       - docker tag my-app:latest $REPOSITORY_URI:latest
-      - docker tag my-app:latest $REPOSITORY_URI:$IMAGE_TAG
 
   post_build:
     commands:
       - echo Build completed on `date`
       - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Replacing placeholder in taskdef.json...
-      - sed -i "s|IMAGE1_NAME|$REPOSITORY_URI:$IMAGE_TAG|" taskdef.json
+      - sed -i "s|IMAGE1_NAME|$REPOSITORY_URI:latest|" taskdef.json
       - echo Writing imagedefinitions.json file...
-      - printf '[{"name":"my-app-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+      - printf '[{"name":"my-app-container","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:latest > imageDetail.json
 
 artifacts:
   files:
