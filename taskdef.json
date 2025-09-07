@@ -9,11 +9,11 @@
       "environment": [],
       "environmentFiles": [],
       "essential": true,
-      "image": "152247411618.dkr.ecr.eu-west-1.amazonaws.com/kiran-my-app:latest",
+      "image": "IMAGE1_NAME",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/my-app-taskdef",
+          "awslogs-group": "/ecs/test-ecs-taskdef",
           "awslogs-create-group": "true",
           "awslogs-region": "eu-west-1",
           "awslogs-stream-prefix": "ecs"
@@ -21,13 +21,13 @@
         "secretOptions": []
       },
       "mountPoints": [],
-      "name": "my-app-container",
+      "name": "test-container",
       "portMappings": [
         {
           "appProtocol": "http",
           "containerPort": 80,
           "hostPort": 80,
-          "name": "my-app-container-80-tcp",
+          "name": "test-container-80-tcp",
           "protocol": "tcp"
         }
       ],
@@ -37,13 +37,14 @@
     }
   ],
   "cpu": "1024",
+  "enableFaultInjection": false,
   "executionRoleArn": "arn:aws:iam::152247411618:role/ecsTaskExecutionRole",
-  "family": "my-app-taskdef",
+  "family": "test-ecs-taskdef",
   "memory": "3072",
   "networkMode": "awsvpc",
   "placementConstraints": [],
-  "registeredAt": "2025-09-02T14:34:41.815Z",
-  "registeredBy": "arn:aws:sts::152247411618:assumed-role/AWSCodePipelineServiceRole-eu-west-1-kiran-pipeline/1756823681512",
+  "registeredAt": "2025-09-06T17:04:56.168Z",
+  "registeredBy": "arn:aws:iam::152247411618:root",
   "requiresAttributes": [
     {
       "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
@@ -58,25 +59,31 @@
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
-      "name": "ecs.capability.execution-role-awslogs"
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
     },
     {
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
       "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
     }
   ],
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "revision": 8,
+  "revision": 1,
   "runtimePlatform": {
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
   "status": "ACTIVE",
-  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:152247411618:task-definition/my-app-taskdef:8",
+  "taskDefinitionArn": "arn:aws:ecs:eu-west-1:152247411618:task-definition/test-ecs-taskdef:1",
   "taskRoleArn": "arn:aws:iam::152247411618:role/ecsTaskRole",
   "volumes": [],
   "tags": []
