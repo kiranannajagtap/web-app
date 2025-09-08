@@ -9,7 +9,7 @@
       "environment": [],
       "environmentFiles": [],
       "essential": true,
-      "image": "IMAGE1_NAME",
+      "image": "REPLACE_IMAGE",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
