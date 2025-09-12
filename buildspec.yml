@@ -35,4 +35,4 @@ artifacts:
         - taskdef.json
     ImageArtifact:
       files:
-        - imageDetail.json
+        - imagedefinitions.json
