@@ -9,7 +9,7 @@
       "environment": [],
       "environmentFiles": [],
       "essential": true,
-      "image": "152247411618.dkr.ecr.eu-west-1.amazonaws.com/test-ecr:latest",
+      "image": "IMAGE1_NAME",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -27,7 +27,7 @@
           "appProtocol": "http",
           "containerPort": 80,
           "hostPort": 80,
-          "name": "test-container-80-tcp",
+          "name": "test-container",
           "protocol": "tcp"
         }
       ],
